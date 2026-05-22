@@ -21,7 +21,7 @@ func letterCombinations(digits string) []string {
 
 	results = []string{} // 初始化全局变量
 	str := ""
-	backTrace(digits, 0, str)
+	backtrack(digits, 0, str)
 
 	return results
 }
@@ -37,7 +37,7 @@ func letterCombinations(digits string) []string {
 	删掉之前加入的该数字字符对应的字母，存入下一个字母，继续递归调用，直到完成所有组合
 */
 
-func backTrace(digits string, index int, str string) {
+func backtrack(digits string, index int, str string) {
 	if index == len(digits) { // 对字符串完成了一次组合
 		//println(str)
 		results = append(results, str) // 存入结果数组
@@ -45,7 +45,7 @@ func backTrace(digits string, index int, str string) {
 		ch := digits[index : index+1] // 当前要处理的数字字符
 		for i := range ref[ch] {      // 遍历该字符对应的 map 的元素（字母）
 			str += string(ref[ch][i])       // 向结果字符串中加入当前数字字符对应的一个字母
-			backTrace(digits, index+1, str) // 继续处理下一个数字字符
+			backtrack(digits, index+1, str) // 继续处理下一个数字字符
 			str = str[:len(str)-1]          // 完成了一个字母的所有组合，从结果字符串中移除该字母，进入下一个循环，加入下一个字母
 		}
 	}
